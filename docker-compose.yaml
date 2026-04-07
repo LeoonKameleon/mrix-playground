@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: mrix_db_container
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  backend:
+    build: ./backend
+    container_name: mrix_backend
+    volumes:
+      - ./backend:/app
+      - /app/.venv
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

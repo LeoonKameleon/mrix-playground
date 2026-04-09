@@ -11,17 +11,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
 
   backend:
     build: ./backend
     container_name: mrix_backend
+    user: "1000:0" 
     volumes:
       - ./backend:/app
       - /app/.venv
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 8000:8000
+      - "8000:8000"
     env_file:
       - .env
     environment:

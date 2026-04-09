@@ -10,7 +10,6 @@ RUN mvn clean package
 FROM eclipse-temurin:23-jre-alpine
 WORKDIR /app
 RUN addgroup -S mrixgroup && adduser -S mrixuser -G mrixgroup
-COPY --from=builder /app/target/mrix.jar /app/mrix.jar
-RUN chown mrixuser:mrixgroup /app/mrix.jar
+COPY --chown=mrixuser:mrixgroup --from=builder /app/target/mrix.jar /app/mrix.jar
 USER mrixuser
 ENTRYPOINT [ "java", "-jar", "mrix.jar" ]

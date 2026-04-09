@@ -23,14 +23,14 @@ def execute_code(code, timeout=30):
         try:
             res = container.wait(timeout=timeout)
             status = res["StatusCode"]
+            output = container.logs().decode("utf-8")
         except (ReadTimeout, ConnectionError): # docker-py sometimes throws a ConnectionError on wait
             container.kill()
             status = 124
+            output = "Execution Timed Out"
         except APIError as e:
             status = -1
             output = f"Docker API Error during wait: {str(e)}"
-        if status != -1 or not output:
-            output = container.logs().decode("utf-8")
     except ImageNotFound:
         output = "Internal Error: Interpreter image not found."
         status = -1

@@ -1,8 +1,14 @@
 from rest_framework import serializers, validators
 from django.contrib.auth.models import User
+from .models import Execution
 
 class CodeExecutionSerializer(serializers.Serializer):
     code = serializers.CharField(required=True, allow_blank=False)
+
+class ExecutionResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Execution
+        fields = ['id', 'code', 'output', 'status', 'execution_time', 'created_at']
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(

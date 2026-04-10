@@ -22,6 +22,14 @@ export default function CodeEditor() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ code }),
             });
+            if (res.status === 429) {
+                setOutput({ 
+                    output: `API rate limit exceeded. Please wait a moment before running code again.`, 
+                    status: 429,
+                    execution_time: 0
+                });
+                return;
+            }
             const data = await res.json();
             setOutput(data);
         } catch (err) {

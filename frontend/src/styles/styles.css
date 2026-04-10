@@ -1,0 +1,144 @@
+:root {
+    --bg-0: #0d1b2a;
+    --bg-1: #1b263b;
+    --bg-2: #415a77;
+
+    --accent-1: #778da9;
+    --accent-2: #e0e1dd;
+
+    --text-1: #e0e1dd;
+    --text-2: #778da9;
+    --text-muted: #415a77;
+
+    --radius: 0.75rem;
+    --border: 0.0625rem solid rgba(224,225,221,0.08);
+}
+
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: "Fira Code", monospace;
+    background: var(--bg-0);
+    color: var(--text-1);
+    font-size: 100%;
+}
+
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-0);
+    color: var(--text-1);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.25rem;
+    height: 3.5rem;
+    background: var(--bg-2);
+    border-bottom: var(--border);
+    z-index: 10;
+}
+
+.topbar div {
+    color: var(--text-1);
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.editor {
+    flex: 1;
+    min-width: 0;
+    border-right: var(--border);
+    display: flex;
+    background: var(--bg-0);
+    overflow: hidden;
+}
+
+.output {
+    flex: 0 0 30vw;
+    min-width: 20rem;
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-0);
+    border-left: var(--border);
+    text-align: left;
+}
+
+.outputHeader {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+    color: var(--text-2);
+    background: var(--bg-1);
+    border-bottom: var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.outputContent {
+    flex: 1;
+    overflow: auto;
+    padding: 1.25rem;
+    background: var(--bg-0);
+}
+
+.runButton {
+    height: 2rem;
+    padding: 0 1rem;
+    background: var(--accent-1);
+    color: var(--bg-0);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: "Fira Code", monospace;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.runButton:hover {
+    background: var(--accent-2);
+}
+
+.runButton:disabled {
+    background: var(--bg-1);
+    color: var(--text-muted);
+}
+
+.error {
+    color: var(--accent-2);
+    font-weight: 700;
+}
+
+.muted {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+pre {
+    font-family: "Fira Code", monospace;
+    color: var(--text-1);
+    font-size: 0.85rem;
+}
+
+.monaco-editor, 
+.monaco-editor .margin, 
+.monaco-editor-background {
+    background-color: var(--bg-0) !important;
+}
+

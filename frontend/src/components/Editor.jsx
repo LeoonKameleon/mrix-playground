@@ -54,7 +54,7 @@ export default function CodeEditor() {
             <div className="topbar">
                 <div className="run-section">
                     <div>
-                    MRIX Playground
+                    Mrix Playground
                     </div>
                     <button
                         className="runButton"

@@ -1,12 +1,19 @@
 import { Editor, useMonaco } from "@monaco-editor/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { registerMrixLanguage } from "../MrixLanguage";
+import { AuthContext } from "../auth/AuthContext";
+import { LoginForm } from "../auth/LoginForm";
+import RegisterForm from "../auth/RegisterForm";
 import "../styles/styles.css";
 
 export default function CodeEditor() {
     const [code, setCode] = useState("// Write your MRIX code here\n");
     const [output, setOutput] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const { token, login, logout, isLoggedIn, user } = useContext(AuthContext);
+    const [isLoginView, setIsLoginView] = useState(true);
+    const [showAuthModal, setShowAuthModal] = useState(false);
     const monaco = useMonaco();
 
     useEffect(() => {
@@ -19,7 +26,10 @@ export default function CodeEditor() {
         try {
             const res = await fetch("http://localhost:8000/api/execute/", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    ...(token && { "Authorization": `Bearer ${token}` })
+                },
                 body: JSON.stringify({ code }),
             });
             if (res.status === 429) {
@@ -42,15 +52,34 @@ export default function CodeEditor() {
     return (
         <div className="app">
             <div className="topbar">
-                <div>MRIX Playground</div>
-
-                <button
-                    className="runButton"
-                    onClick={handleRun}
-                    disabled={loading}
-                >
-                    {loading ? "Running..." : "Run"}
-                </button>
+                <div className="run-section">
+                    <div>
+                    MRIX Playground
+                    </div>
+                    <button
+                        className="runButton"
+                        onClick={handleRun}
+                        disabled={loading}
+                    >
+                        {loading ? "Running..." : "Run"}
+                    </button>
+                </div>
+                <div className="auth-section">
+                    {isLoggedIn ? (
+                        <>
+                            <span className="user-welcome">
+                                Welcome, <strong>{user?.username}</strong>
+                            </span>
+                            <button onClick={logout} className="btn-logout">
+                                Log Out
+                            </button>
+                        </>
+                    ) : (
+                        <button onClick={() => setShowAuthModal(true)} className="btn-login">
+                            Log in / Register
+                        </button>
+                    )}
+                </div>
             </div>
 
             <div className="main">
@@ -93,10 +122,28 @@ export default function CodeEditor() {
                                 Output will be visible here...
                             </div>
                         )}
-
                     </div>
                 </div>
             </div>
+            {showAuthModal && (
+                <div className="modal-overlay" onClick={() => setShowAuthModal(false)}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="close-button" onClick={() => setShowAuthModal(false)}>×</button>
+                        
+                        {isLoginView ? (
+                            <>
+                                <h2>Log in</h2>
+                                <LoginForm onLoginSuccess={() => setShowAuthModal(false)} />
+                                <p className="switch-text">
+                                    Don't have an account? <span onClick={() => setIsLoginView(false)}>Register</span>
+                                </p>
+                            </>
+                        ) : (
+                            <RegisterForm onSwitchToLogin={() => setIsLoginView(true)} />
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

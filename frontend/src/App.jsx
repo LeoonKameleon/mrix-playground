@@ -1,9 +1,12 @@
 import CodeEditor from './components/Editor'
 import './App.css'
+import { AuthProvider } from './auth/AuthContext';
 
 function App() {
   return (
-    <CodeEditor/>
+    <AuthProvider>
+      <CodeEditor/>
+    </AuthProvider>
   );
 }
 

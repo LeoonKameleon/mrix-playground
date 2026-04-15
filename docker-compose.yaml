@@ -41,5 +41,11 @@ services:
     environment:
       - VITE_API_URL=http://localhost:8000
 
+  mrix_image_prepull:
+    image: "leonkameleon/mrix:latest"
+    pull_policy: always
+    entrypoint: ["echo", "Mrix image pulled successfully"]
+    restart: no
+
 volumes:
   postgres_data:

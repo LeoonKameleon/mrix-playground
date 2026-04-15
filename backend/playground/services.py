@@ -10,7 +10,7 @@ def execute_code(code, timeout=30):
     container = None
     try:
         container = client.containers.run(
-            image="mrix_interpreter",
+            image="leonkameleon/mrix:latest",
             command=["-c", code],
             remove=False,
             stderr=True,

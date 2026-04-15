@@ -114,7 +114,7 @@ export default function CodeEditor() {
                                 </pre>
 
                                 <div className="muted">
-                                    {output.execution_time?.toFixed(3)}s
+                                    {(output.execution_time ?? 0).toFixed(3)}s
                                 </div>
                             </>
                         ) : (

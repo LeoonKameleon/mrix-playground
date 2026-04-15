@@ -7,7 +7,7 @@ import RegisterForm from "../auth/RegisterForm";
 import "../styles/styles.css";
 
 export default function CodeEditor() {
-    const [code, setCode] = useState("// Write your MRIX code here\n");
+    const [code, setCode] = useState("// Write your mrix code here\n");
     const [output, setOutput] = useState(null);
     const [loading, setLoading] = useState(false);
 

@@ -40,6 +40,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        data["username"] = self.user.username
+        if self.user:
+            data["username"] = self.user.username
 
         return data

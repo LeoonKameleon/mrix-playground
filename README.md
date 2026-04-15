@@ -1,7 +1,7 @@
 # Mrix Playground
 
 <p align="justify">
-Mrix Playground is a web environment for the rix programming language, built with React, Vite, and Monaco Editor. It supports syntax highlighting and server-side code execution handled by Django REST Framework backend with JWT authentication, all running within Docker containers. Data is persisted using PostgreSQL database.
+Mrix Playground is a web environment for the mrix programming language, built with React, Vite, and Monaco Editor. It supports syntax highlighting and server-side code execution handled by Django REST Framework backend with JWT authentication, all running within Docker containers. Data is persisted using PostgreSQL database.
 </p>
 
 The core mrix language interpreter can be found [here](https://github.com/LeoonKameleon/mrix).

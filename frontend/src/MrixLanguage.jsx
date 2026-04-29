@@ -19,8 +19,9 @@ export function registerMrixLanguage(monaco) {
             'eye', 'zeros', 'ones', 'inv', 'abs', 'sqrt', 'sin', 'cos', 
             'tan', 'log', 'ln', 'pow', 'exp', 'floor', 'ceil', 'round',
             'sum', 'min', 'max', 'mean', 'size', 'rows', 'cols', 'len',
-            'contains', 'at', 'type', 'int', 'float', 'str', 'bool',
-            'f_read', 'f_readline', 'f_lines', 'f_write', 'f_append'
+            'contains', 'at', 'type', 'int', 'float', 'str', 'bool', 'tuple',
+            'f_read', 'f_readline', 'f_lines', 'f_write', 'f_append', 'range',
+            'reverse'
         ],
 
         tokenizer: {
@@ -88,7 +89,7 @@ export function registerMrixLanguage(monaco) {
                 { label: 'mean', detail: 'mean(x...) -> NUM', documentation: 'Arithmetic mean.', insertText: 'mean(${1:x})' },
 
                 // Utilities
-                { label: 'size', detail: 'size(A) -> MATRIX', documentation: 'Returns [rows, cols].', insertText: 'size(${1:A})' },
+                { label: 'size', detail: 'size(A) -> TUPLE', documentation: 'Returns (rows, cols).', insertText: 'size(${1:A})' },
                 { label: 'rows', detail: 'rows(A) -> INT', documentation: 'Number of rows.', insertText: 'rows(${1:A})' },
                 { label: 'cols', detail: 'cols(A) -> INT', documentation: 'Number of columns.', insertText: 'cols(${1:A})' },
                 { label: 'len', detail: 'len(x) -> INT', documentation: 'String length or total matrix elements.', insertText: 'len(${1:x})' },
@@ -99,6 +100,8 @@ export function registerMrixLanguage(monaco) {
                 { label: 'float', detail: 'float(x) -> FLOAT', documentation: 'Cast to FLOAT.', insertText: 'float(${1:x})' },
                 { label: 'str', detail: 'str(x) -> STRING', documentation: 'Cast to STRING.', insertText: 'str(${1:x})' },
                 { label: 'bool', detail: 'bool(x) -> BOOL', documentation: 'Cast to BOOL.', insertText: 'bool(${1:x})' },
+                { label: 'str', detail: 'tuple(x) -> TUPLE', documentation: 'Cast to TUPLE', insertText: 'tuple(${1:x})' },
+                { label: 'reverse', detail: 'reverse(x) -> STRING | TUPLE', documentation: 'Returns reversed string or tuple.', insertText: 'reverse(${1:x})' },
 
                 // File I/O
                 { label: 'f_read', detail: 'f_read(path) -> STRING', documentation: 'Read file content.', insertText: 'f_read("${1:path}")' },
@@ -111,6 +114,8 @@ export function registerMrixLanguage(monaco) {
                 { label: 'eye', detail: 'Identity matrix', documentation: 'eye(n) or eye(r, c)', insertText: 'eye(${1:n})' },
                 { label: 'zeros', detail: 'Zero matrix', documentation: 'zeros(n) or zeros(r, c)', insertText: 'zeros(${1:n})' },
                 { label: 'ones', detail: 'Ones matrix', documentation: 'ones(n) or ones(r, c)', insertText: 'ones(${1:n})' },
+                { label: 'range', detail: 'range(s, e, step) -> TUPLE', documentation: 'Returns a sequence from s to e with optional step (default 1).', insertText: 'range(${1:s}, ${2:e}, ${3:step})' },
+                
             ].map(item => ({
                 ...item,
                 kind: item.kind || monaco.languages.CompletionItemKind.Function,

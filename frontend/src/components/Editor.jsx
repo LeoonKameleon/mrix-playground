@@ -2,7 +2,7 @@ import { Editor, useMonaco } from "@monaco-editor/react";
 import { useState, useEffect, useContext } from "react";
 import { registerMrixLanguage } from "../MrixLanguage";
 import { AuthContext } from "../auth/AuthContext";
-import { LoginForm } from "../auth/LoginForm";
+import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 import "../styles/styles.css";
 
@@ -32,6 +32,11 @@ export default function CodeEditor() {
                 },
                 body: JSON.stringify({ code }),
             });
+            if (res.status === 401) {
+                logout();
+                alert("Session expired. Please log in again.");
+                return;
+            }
             if (res.status === 429) {
                 setOutput({ 
                     output: `API rate limit exceeded. Please wait a moment before running code again.`, 

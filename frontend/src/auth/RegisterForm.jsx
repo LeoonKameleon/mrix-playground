@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const RegisterForm = ({ onSwitchToLogin }) => {
+const RegisterForm = ({ onSwitchToLogin }) => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',

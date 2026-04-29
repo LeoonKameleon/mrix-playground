@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from './AuthContext';
 
-export const LoginForm = ({onSuccess}) => {
+const LoginForm = ({onLoginSuccess}) => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const { login } = useContext(AuthContext);
 
@@ -16,8 +16,7 @@ export const LoginForm = ({onSuccess}) => {
         if (res.ok) {
             const data = await res.json();
             login(data);
-            alert("Logged in!");
-            if (onSuccess) onSuccess();
+            if (onLoginSuccess) onLoginSuccess();
         } else {
             alert("Login error");
         }
@@ -31,3 +30,5 @@ export const LoginForm = ({onSuccess}) => {
         </form>
     );
 };
+
+export default LoginForm;

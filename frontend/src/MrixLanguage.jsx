@@ -4,7 +4,7 @@ export function registerMrixLanguage(monaco) {
     monaco.languages.setMonarchTokensProvider('mrix', {
         keywords: [
             'if', 'else', 'while', 'for', 'funct', 'return', 'print', 
-            'import', 'continue', 'break', 'and', 'or', 'not'
+            'import', 'continue', 'break', 'and', 'or', 'not', 'iter', 'in'
         ],
 
         operators: [
@@ -21,7 +21,7 @@ export function registerMrixLanguage(monaco) {
             'sum', 'min', 'max', 'mean', 'size', 'rows', 'cols', 'len',
             'contains', 'at', 'type', 'int', 'float', 'str', 'bool', 'tuple',
             'f_read', 'f_readline', 'f_lines', 'f_write', 'f_append', 'range',
-            'reverse'
+            'reverse', 'hmap'
         ],
 
         tokenizer: {
@@ -100,7 +100,7 @@ export function registerMrixLanguage(monaco) {
                 { label: 'float', detail: 'float(x) -> FLOAT', documentation: 'Cast to FLOAT.', insertText: 'float(${1:x})' },
                 { label: 'str', detail: 'str(x) -> STRING', documentation: 'Cast to STRING.', insertText: 'str(${1:x})' },
                 { label: 'bool', detail: 'bool(x) -> BOOL', documentation: 'Cast to BOOL.', insertText: 'bool(${1:x})' },
-                { label: 'str', detail: 'tuple(x) -> TUPLE', documentation: 'Cast to TUPLE', insertText: 'tuple(${1:x})' },
+                { label: 'tuple', detail: 'tuple(x) -> TUPLE', documentation: 'Cast to TUPLE', insertText: 'tuple(${1:x})' },
                 { label: 'reverse', detail: 'reverse(x) -> STRING | TUPLE', documentation: 'Returns reversed string or tuple.', insertText: 'reverse(${1:x})' },
 
                 // File I/O
